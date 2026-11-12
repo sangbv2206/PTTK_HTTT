@@ -1,0 +1,439 @@
+/* ==============================================================================
+   CINEMA POS DESIGN SYSTEM - LIGHT THEME (GIAO DIỆN SÁNG, HIỆN ĐẠI, DOANH NGHIỆP)
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg-page: #f1f5f9;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --primary-red: #dc2626;
+    --primary-red-hover: #b91c1c;
+    --primary-blue: #2563eb;
+    --primary-blue-hover: #1d4ed8;
+    --success-green: #10b981;
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: var(--bg-page);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==============================================================================
+   THANH TASKBAR CỐ ĐỊNH TRÊN CÙNG (POS NAVBAR)
+   ============================================================================== */
+.pos-topbar {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.pos-topbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 60px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pos-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pos-topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.3px;
+}
+
+.pos-tag-pos {
+    background: var(--primary-red);
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.pos-counter-pill {
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 1px solid #e2e8f0;
+}
+
+.pos-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.pos-user-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    color: #475569;
+    background: #f8fafc;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.pos-user-name {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.pos-user-code {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.pos-btn-logout {
+    background: #ef4444;
+    color: #ffffff !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: background 0.15s;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pos-btn-logout:hover {
+    background: #dc2626;
+    color: #ffffff !important;
+}
+
+/* ==============================================================================
+   KHUNG NỘI DUNG CHÍNH (CONTAINER)
+   ============================================================================== */
+.cinema-container {
+    width: 100%;
+    max-width: 680px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin: 30px auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.cinema-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.brand-badge {
+    display: inline-block;
+    background: #fee2e2;
+    color: var(--primary-red);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.cinema-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 6px;
+}
+
+.cinema-desc {
+    color: var(--text-muted);
+    font-size: 13.5px;
+}
+
+/* ==============================================================================
+   INPUTS & FORM CONTROLS
+   ============================================================================== */
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.input-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.input-label .req {
+    color: var(--primary-red);
+}
+
+.input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.input-box .input-control {
+    padding-left: 38px;
+}
+
+.input-control {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    color: var(--text-main);
+    padding: 10px 14px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input-control:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* ==============================================================================
+   BUTTONS
+   ============================================================================== */
+.btn, .btn-cinema-primary, .btn-cinema-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: background 0.15s, opacity 0.15s;
+}
+
+.btn-primary, .btn-cinema-primary {
+    background: var(--primary-red);
+    color: #ffffff !important;
+}
+
+.btn-primary:hover, .btn-cinema-primary:hover {
+    background: var(--primary-red-hover);
+}
+
+.btn-secondary, .btn-cinema-secondary {
+    background: #f1f5f9;
+    color: #334155 !important;
+    border-color: #cbd5e1;
+}
+
+.btn-secondary:hover, .btn-cinema-secondary:hover {
+    background: #e2e8f0;
+    color: #0f172a !important;
+}
+
+.cta-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* ==============================================================================
+   ALERTS
+   ============================================================================== */
+.cinema-alert {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-weight: 500;
+}
+
+/* ==============================================================================
+   TABLES & DETAILS
+   ============================================================================== */
+.details-list {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 16px;
+    margin: 20px 0;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13.5px;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: var(--text-muted);
+}
+
+.detail-val {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+tr:hover td {
+    background: #f8fafc;
+}
+
+.membership-card-wrap {
+    margin: 20px 0;
+}
+
+.digital-card {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #ffffff;
+    border-radius: 14px;
+    padding: 22px 24px;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.card-brand {
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: #f8fafc;
+}
+
+.card-chip {
+    width: 34px;
+    height: 24px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+}
+
+.card-number {
+    font-family: monospace;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    color: #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-holder-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    margin-bottom: 2px;
+}
+
+.card-holder-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.card-tier-tag {
+    background: rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.5);
+    color: #fde68a;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
