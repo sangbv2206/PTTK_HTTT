@@ -17,13 +17,6 @@ import model.Customer;
 import model.MembershipCard6;
 import model.MembershipTier6;
 
-/**
- * RegisterMemberServlet6.java
- * Lớp điều khiển chính (Controller Servlet) của use case Đăng ký thành viên.
- * Thiết kế chuẩn theo mẫu trong tài liệu Lab 1 (MVC + DAO Pattern):
- * - Khai báo serialVersionUID (UID)
- * - doPost tự gọi doGet(request, response) để tập trung xử lý điều phối switch-case
- */
 @WebServlet("/register")
 public class RegisterMemberServlet6 extends HttpServlet {
     // 1. UID xác thực tuần tự hóa chuẩn Java Servlet
@@ -39,29 +32,31 @@ public class RegisterMemberServlet6 extends HttpServlet {
         tierDAO = new MembershipTierDAO6();
         cardDAO = new MembershipCardDAO6();
     }
-
-    /**
-     * Phương thức doPost tự gọi lại chính phương thức doGet của lớp
-     * theo đúng chuẩn tài liệu hướng dẫn mẫu (Lab 1) để tập trung điều phối.
-     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // BƯỚC 7: Trang MemberRegistrationUI6.jsp gọi phương thức doPost() của lớp
+        // RegisterMemberServlet6
+        // BƯỚC 8: Lớp RegisterMemberServlet6 tự gọi lại phương thức doGet()
         doGet(request, response);
     }
 
     /**
-     * Phương thức doGet tập trung nhận mọi yêu cầu và điều hướng (Action Dispatcher)
+     * Phương thức doGet tập trung nhận mọi yêu cầu và điều hướng (Action
+     * Dispatcher)
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // BƯỚC 2: Trang CustomerLoginUI6.jsp gọi phương thức doGet() của lớp
+        // RegisterMemberServlet6
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
         String action = request.getParameter("action");
         if (action == null) {
-            // Nếu người dùng gửi POST form mà không có query action thì mặc định là register
+            // Nếu người dùng gửi POST form mà không có query action thì mặc định là
+            // register
             if ("POST".equalsIgnoreCase(request.getMethod())) {
                 action = "register";
             } else {
@@ -72,11 +67,13 @@ public class RegisterMemberServlet6 extends HttpServlet {
         try {
             switch (action) {
                 case "register":
+                    // BƯỚC 9: Lớp RegisterMemberServlet6 tự gọi hàm processRegister()
                     processRegister(request, response);
                     break;
                 case "showForm":
                 case "home":
                 default:
+                    // BƯỚC 3: Lớp RegisterMemberServlet6 tự gọi hàm showRegister()
                     showRegister(request, response);
                     break;
             }
@@ -88,16 +85,19 @@ public class RegisterMemberServlet6 extends HttpServlet {
     /**
      * Hiển thị màn hình 2: Form nhập thông tin đăng ký (MemberRegistrationUI6.jsp)
      */
-    private void showRegister(HttpServletRequest request, HttpServletResponse response) 
+    private void showRegister(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // BƯỚC 4: Lớp RegisterMemberServlet6 gọi phương thức forward() sang trang
+        // MemberRegistrationUI6.jsp
         RequestDispatcher dispatcher = request.getRequestDispatcher("MemberRegistrationUI6.jsp");
         dispatcher.forward(request, response);
     }
 
     /**
-     * Xử lý toàn bộ logic nghiệp vụ đăng ký thành viên và chuyển màn hình 3 (RegistrationSuccessUI6.jsp)
+     * Xử lý toàn bộ logic nghiệp vụ đăng ký thành viên và chuyển màn hình 3
+     * (RegistrationSuccessUI6.jsp)
      */
-    private void processRegister(HttpServletRequest request, HttpServletResponse response) 
+    private void processRegister(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Đọc 8 tham số từ form
         String fullName = request.getParameter("txtFullName");
@@ -119,12 +119,12 @@ public class RegisterMemberServlet6 extends HttpServlet {
 
         // 1. Kiểm tra các trường bắt buộc
         if (fullName == null || fullName.trim().isEmpty() ||
-            phoneNumber == null || phoneNumber.trim().isEmpty() ||
-            dobStr == null || dobStr.trim().isEmpty() ||
-            username == null || username.trim().isEmpty() ||
-            email == null || email.trim().isEmpty() ||
-            password == null || password.trim().isEmpty() ||
-            confirmPassword == null || confirmPassword.trim().isEmpty()) {
+                phoneNumber == null || phoneNumber.trim().isEmpty() ||
+                dobStr == null || dobStr.trim().isEmpty() ||
+                username == null || username.trim().isEmpty() ||
+                email == null || email.trim().isEmpty() ||
+                password == null || password.trim().isEmpty() ||
+                confirmPassword == null || confirmPassword.trim().isEmpty()) {
 
             request.setAttribute("errorMsg", "Vui lòng điền đầy đủ các trường thông tin bắt buộc (*).");
             request.getRequestDispatcher("MemberRegistrationUI6.jsp").forward(request, response);
@@ -155,19 +155,29 @@ public class RegisterMemberServlet6 extends HttpServlet {
         }
 
         // 5. Kiểm tra trùng username bằng getCustomer
+        // BƯỚC 10: Lớp RegisterMemberServlet6 gọi hàm getCustomer(username) của lớp
+        // CustomerDAO6
+        // BƯỚC 11: Lớp CustomerDAO6 trả về null cho lớp RegisterMemberServlet6
         if (customerDAO.getCustomer(username.trim()) != null) {
-            request.setAttribute("errorMsg", "Tên đăng nhập '" + username + "' đã được sử dụng. Vui lòng chọn tên khác.");
+            request.setAttribute("errorMsg",
+                    "Tên đăng nhập '" + username + "' đã được sử dụng. Vui lòng chọn tên khác.");
             request.getRequestDispatcher("MemberRegistrationUI6.jsp").forward(request, response);
             return;
         }
 
         // 6. Kiểm tra trùng SĐT và Email bằng getCustomer
+        // BƯỚC 12: Lớp RegisterMemberServlet6 gọi hàm getCustomer(phone) của lớp
+        // CustomerDAO6
+        // BƯỚC 13: Lớp CustomerDAO6 trả về null cho lớp RegisterMemberServlet6
         if (customerDAO.getCustomer(phoneClean) != null) {
             request.setAttribute("errorMsg", "Số điện thoại '" + phoneNumber + "' đã được đăng ký thành viên!");
             request.getRequestDispatcher("MemberRegistrationUI6.jsp").forward(request, response);
             return;
         }
 
+        // BƯỚC 14: Lớp RegisterMemberServlet6 gọi hàm getCustomer(email) của lớp
+        // CustomerDAO6
+        // BƯỚC 15: Lớp CustomerDAO6 trả về null cho lớp RegisterMemberServlet6
         if (customerDAO.getCustomer(emailClean) != null) {
             request.setAttribute("errorMsg", "Email '" + email + "' đã được đăng ký thành viên!");
             request.getRequestDispatcher("MemberRegistrationUI6.jsp").forward(request, response);
@@ -197,6 +207,10 @@ public class RegisterMemberServlet6 extends HttpServlet {
         }
 
         // 8. Lấy hạng thẻ mặc định thấp nhất (Hạng Chuẩn / Đồng)
+        // BƯỚC 16: Lớp RegisterMemberServlet6 gọi hàm getLowestTier() của lớp
+        // MembershipTierDAO6
+        // BƯỚC 19: Lớp MembershipTierDAO6 trả về đối tượng lowestTier cho lớp
+        // RegisterMemberServlet6
         MembershipTier6 lowestTier = tierDAO.getLowestTier();
         if (lowestTier == null) {
             lowestTier = new MembershipTier6(1, "Thành viên Chuẩn (Đồng)", 0.05, 0, 0.0, "Tích lũy 5%");
@@ -207,22 +221,41 @@ public class RegisterMemberServlet6 extends HttpServlet {
         Date issueDate = Date.valueOf(now); // Ngày kích hoạt thẻ
         Date expiryDate = Date.valueOf("2099-12-31"); // Thẻ vô thời hạn
 
+        // BƯỚC 20: Lớp RegisterMemberServlet6 gọi khởi tạo thực thể new
+        // MembershipCard6(...) của lớp MembershipCard6
+        // BƯỚC 21: Lớp MembershipCard6 trả về đối tượng newCard cho lớp
+        // RegisterMemberServlet6
         MembershipCard6 newCard = new MembershipCard6(issueDate, expiryDate, "ACTIVE", lowestTier);
+
+        // BƯỚC 22: Lớp RegisterMemberServlet6 gọi khởi tạo thực thể new Customer(...)
+        // của lớp Customer
+        // BƯỚC 23: Lớp Customer trả về đối tượng newCustomer cho lớp
+        // RegisterMemberServlet6
         Customer newCustomer = new Customer(fullName.trim(), dob, address != null ? address.trim() : "",
-                                            phoneClean, emailClean, username.trim(), password);
+                phoneClean, emailClean, username.trim(), password);
 
         boolean transactionSuccess = false;
         try (java.sql.Connection con = dao.DAO.getNewConnection()) {
             con.setAutoCommit(false);
             try {
                 // Bước 1: Kích hoạt thẻ trong transaction
+                // BƯỚC 24: Lớp RegisterMemberServlet6 gọi hàm issueCard(con, newCard) của lớp
+                // MembershipCardDAO6
+                // BƯỚC 25: Lớp MembershipCardDAO6 trả về kết quả true cho lớp
+                // RegisterMemberServlet6
                 boolean cardCreated = cardDAO.issueCard(con, newCard);
                 if (!cardCreated) {
                     throw new java.sql.SQLException("Không thể tạo thẻ thành viên!");
                 }
+
+                // BƯỚC 26: Lớp RegisterMemberServlet6 gọi hàm setCard(newCard) của đối tượng
+                // Customer
                 newCustomer.setCard(newCard);
 
                 // Bước 2: Lưu tài khoản và khách hàng trong cùng transaction
+                // BƯỚC 27: Lớp RegisterMemberServlet6 gọi hàm createCustomer(con, newCustomer)
+                // của lớp CustomerDAO6
+                // BƯỚC 28: Lớp CustomerDAO6 trả về kết quả true cho lớp RegisterMemberServlet6
                 boolean custCreated = customerDAO.createCustomer(con, newCustomer);
                 if (!custCreated) {
                     throw new java.sql.SQLException("Không thể lưu thông tin khách hàng!");
@@ -231,7 +264,7 @@ public class RegisterMemberServlet6 extends HttpServlet {
                 con.commit(); // Chốt Transaction trọn vẹn cả 2 bảng
                 transactionSuccess = true;
             } catch (Exception ex) {
-                con.rollback(); // Rollback toàn bộ nếu có bất kỳ lỗi nào, không sinh thẻ mồ côi
+                con.rollback(); // Rollback toàn bộ nếu có bất kỳ lỗi nào, không sinh thẻ thừa
                 throw ex;
             }
         } catch (Exception e) {
@@ -244,6 +277,8 @@ public class RegisterMemberServlet6 extends HttpServlet {
             request.getSession().setAttribute("prefillUsername", newCustomer.getUsername());
             request.setAttribute("customer", newCustomer);
             request.setAttribute("card", newCard);
+            // BƯỚC 29: Lớp RegisterMemberServlet6 gọi phương thức forward() sang trang
+            // RegistrationSuccessUI6.jsp
             RequestDispatcher dispatcher = request.getRequestDispatcher("RegistrationSuccessUI6.jsp");
             dispatcher.forward(request, response);
         }

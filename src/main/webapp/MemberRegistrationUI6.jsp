@@ -32,6 +32,7 @@
             </div>
         </c:if>
 
+        <!-- BƯỚC 5: Trang MemberRegistrationUI6.jsp hiển thị form đăng ký cho Khách hàng -->
         <!-- Form nhập thông tin thành viên (inRegistrationInfo : frm) -->
         <form action="register" method="POST" id="frmRegistration">
             <input type="hidden" name="action" value="register">
@@ -152,6 +153,7 @@
             </div>
 
             <!-- Nút Thao tác -->
+            <!-- BƯỚC 6: Khách hàng nhập thông tin và click nút "Hoàn Tất Đăng Ký" (gửi POST sang Servlet) -->
             <div class="cta-group">
                 <button type="submit" class="btn btn-cinema-primary" id="btnRegister" name="subRegister" style="width: 100%; padding: 13px; font-size: 15px;">
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

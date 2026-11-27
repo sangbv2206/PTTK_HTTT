@@ -10,6 +10,7 @@
 </head>
 <body>
 
+    <!-- BƯỚC 30: Trang RegistrationSuccessUI6.jsp hiển thị màn hình đăng ký thành công cho Khách hàng -->
     <div class="cinema-container" style="max-width: 600px;">
         <!-- Header -->
         <div class="cinema-header" style="margin-bottom: 20px;">
@@ -22,7 +23,7 @@
             </p>
         </div>
 
-        <!-- THẺ THÀNH VIÊN KỸ THUẬT SỐ CHUẨN ĐỒ HỌA (Digital Cinema Card) -->
+        <!-- THẺ THÀNH VIÊN KỸ THUẬT SỐ (Digital Cinema Card) -->
         <div class="membership-card-wrap">
             <div class="digital-card">
                 <div class="card-top">

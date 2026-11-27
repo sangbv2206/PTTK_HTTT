@@ -30,6 +30,8 @@ public class MembershipTierDAO6 extends DAO {
              ResultSet rs = ps.executeQuery()) {
 
             if (rs.next()) {
+                // BƯỚC 17: Lớp MembershipTierDAO6 gọi khởi tạo thực thể new MembershipTier6(...) của lớp MembershipTier6
+                // BƯỚC 18: Lớp MembershipTier6 trả về đối tượng lowestTier cho lớp MembershipTierDAO6
                 tier = new MembershipTier6(
                     rs.getInt("id"),
                     rs.getString("tierName"),

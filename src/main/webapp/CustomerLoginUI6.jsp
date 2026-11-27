@@ -51,6 +51,7 @@
         </div>
 
         <!-- NÚT THAO TÁC CHÍNH -->
+        <!-- BƯỚC 1: Khách hàng click nút "Đăng Ký Thành Viên Mới" trên giao diện CustomerLoginUI6.jsp -->
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 25px;">
             <a href="register?action=showForm" class="btn-cinema-primary" id="lnkRegisterNew" style="font-size: 16px; padding: 15px; width: 100%; text-decoration: none; justify-content: center;">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
